@@ -1,0 +1,90 @@
+﻿@{
+    ViewData["Title"] = "User";
+}
+<div style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; font-weight:bold; font-size: 30px ">
+    <input id="gt1"/>
+
+    <button id="cong">+</button>
+    <button id="tru">-</button>
+    <button id="nhan">*</button>
+    <button id="chia">/</button>
+
+    <input id="gt2" /> <div>=</div>
+    <div id="kq"></div>
+</div>
+
+<script>
+
+    document.querySelector('button#cong').addEventListener('click', function (param) {
+
+        var gt1 = parseFloat(document.getElementById("gt1").value);
+        var gt2 = parseFloat(document.getElementById("gt2").value);
+
+        
+        if (isNaN(gt1) || isNaN(gt2)){
+            alert("Nhập sai, hãy nhập lại!")
+            return;
+        }
+
+        var kq;
+        kq = gt1 + gt2;
+
+        document.querySelector('div#kq').innerHTML = kq;
+    })
+
+    document.querySelector('button#tru').addEventListener('click', function (param) {
+
+        var gt1 = parseFloat(document.getElementById("gt1").value);
+        var gt2 = parseFloat(document.getElementById("gt2").value);
+
+
+        if (isNaN(gt1) || isNaN(gt2)) {
+            alert("Nhập sai, hãy nhập lại!")
+            return;
+        }
+
+        var kq;
+        kq = gt1 - gt2;
+
+        document.querySelector('div#kq').innerHTML = kq;
+    })
+
+    document.querySelector('button#nhan').addEventListener('click', function (param) {
+
+        var gt1 = parseFloat(document.getElementById("gt1").value);
+        var gt2 = parseFloat(document.getElementById("gt2").value);
+
+
+        if (isNaN(gt1) || isNaN(gt2)) {
+            alert("Nhập sai, hãy nhập lại!")
+            return;
+        }
+
+        var kq;
+        kq = gt1 * gt2;
+
+        document.querySelector('div#kq').innerHTML = kq;
+    })
+
+    document.querySelector('button#chia').addEventListener('click', function (param) {
+
+        var gt1 = parseFloat(document.getElementById("gt1").value);
+        var gt2 = parseFloat(document.getElementById("gt2").value);
+
+
+        if (isNaN(gt1) || isNaN(gt2)) {
+            alert("Nhập sai, hãy nhập lại!")
+            return;
+        }
+
+        var kq;
+        if (gt2 !== 0) {
+            kq = gt1 / gt2
+        }
+        if (gt2 == 0) {
+            kq = 0;
+        }
+
+        document.querySelector('div#kq').innerHTML = kq;
+    })
+</script>

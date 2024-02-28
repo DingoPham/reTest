@@ -1,0 +1,51 @@
+﻿@{
+    ViewData["Title"] = "New Event";
+}
+<div style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; font-weight:bold; font-size: 30px ">
+    <input id="so1" type="number"/>
+    <select id="pheptinh" style="text-align:center; width: 170px; height: 80px">
+        <option value="" disabled selected hidden>Hãy chọn</option>
+        <option value="cong">Cộng</option>
+        <option value="tru">Trừ</option>
+        <option value="nhan">Nhân</option>
+        <option value="chia">Chia</option>
+    </select>
+    <input id="so2" type="number"/>
+    <div id="kq"></div>
+</div>
+<script>
+    document.querySelector("#pheptinh").addEventListener("change", function(){
+        var inRaCon = document.querySelector("#pheptinh").value;
+        console.log("Bạn đã thay đổi phép tính thành phép: " + inRaCon);
+        tinh();
+    })
+
+    function tinh(){
+        var pheptinh = document.querySelector("#pheptinh").value;
+        var so1 = document.querySelector("#so1").value;
+        var so2 = document.querySelector("#so2").value;
+
+        if (isNaN(so1) || isNaN(so2)) {
+            alert("Vui lòng nhập số hợp lệ cho cả hai ô");
+            return;
+        }
+
+        fetch(
+            '/Test/Maytinh/' + pheptinh + '?so1=' + so1 + '&so2=' + so2, 
+            { method: 'POST' }
+        ).then(response => {
+            if (!response.ok) {
+                throw new Error('Phản hồi mạng không ổn định!');
+            }
+            return response.json();
+        })
+            .then(data => {
+                document.getElementById('kq').innerHTML = 'Kết quả:' + data;
+            })
+            .catch(error => {
+                console.error('Có vấn đề khi bạn tiến hành dùng Fetch: ', error);
+            });
+    }
+
+</script>
+

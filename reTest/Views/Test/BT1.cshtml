@@ -1,0 +1,29 @@
+﻿@{
+    ViewData["Title"] = "BT1";
+}
+
+<input id="nhap" placeholder="Hãy nhập nội dung vào đây" style="width: 300px"/>
+
+
+<script>
+    const nhapElement = document.querySelector("#nhap");
+
+    nhapElement, addEventListener("change", function (event) {
+        const nhapValue = event.target.value;
+        sendDataToBackend(nhapValue);
+    });
+
+    function sendDataToBackend(data) {
+        fetch(
+            `/Test/Guidata/${data}`, { // nếu để /Guidata/nhan/ thì sẽ gọi đến controller Guidata chứ không phải controller Test
+            method: 'PUT'
+        }
+        ).then(response => response.json())
+            .then(result => {
+                console.log(result.message);
+            })
+            .catch(error => {
+                console.error("Đã xảy ra lỗi: ", error);
+            }); 
+    }
+</script>

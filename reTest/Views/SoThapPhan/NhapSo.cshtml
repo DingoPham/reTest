@@ -1,0 +1,31 @@
+﻿@{
+    ViewData["Title"] = "NhapSo";
+}
+
+<input id="nhap" placeholder="Mời bạn nhập số"/>
+
+<div id="hienthi"></div>
+
+<script>
+    const soNhap = document.querySelector("#nhap");
+
+    soNhap, addEventListener("change", function (event) {
+        const nhapValue = event.target.value;
+        sendDataToBackend(nhapValue);
+    });
+
+    function sendDataToBackend(data) {
+        fetch(
+            `/SoThapPhan/CheckSoTP/${data}`, {
+                method: 'POST'
+            }
+        ).then(response => response.json())
+            .then(data => {
+                document.querySelector('#hienthi').innerText = data.message;
+            })
+            .catch(error => {
+                console.error("Đã xảy ra lỗi: ", error);
+            });
+
+    }
+</script>
